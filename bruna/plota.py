@@ -2,6 +2,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import pandas as pd
 
+plt.switch_backend('Agg')
+
 # Carregar o arquivo CSV
 df = pd.read_csv('resultados.csv')
 
@@ -27,4 +29,5 @@ for i in range(num_algoritmos):
     plt.ylabel('Tempo')
     plt.title(f'Algoritmo {i+1}')
     plt.grid(True)
-    plt.show()
+    plt.savefig(f'algoritmo_{i+1}.png')  # Salvar o gráfico como arquivo PNG
+    plt.close() 
