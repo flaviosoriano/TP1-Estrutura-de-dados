@@ -16,7 +16,7 @@ echo "iteracao,alg,alg,seed,seed,size,size,time,time,cmp,cmp,move,move,calls,cal
 iteracao=1
 for alg in s i q q3 qi q3i h rs b m c bu rx  # Loop para letras especificadas
 do
-    for i in {1..260}
+    for i in {1..250}
     do
         t=0  # Define o valor de t como 0
         output=$(./bin/pa1.out -z $i -s 32 -a $alg -t $t)
