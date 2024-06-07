@@ -603,6 +603,15 @@ void clkDiff(struct timespec t1, struct timespec t2,
   }
 }
 
+void print_csv(char *filename, sortperf_t *s, int size, struct timespec *time) {
+    FILE *fp = fopen(filename, "a"); // Abrir em modo de adição
+    if (fp == NULL) {
+        perror("Erro ao abrir o arquivo");
+        exit(EXIT_FAILURE);
+    }
+    fprintf(fp, "%d,%d,%d,%d,%ld.%.9ld\n", size, s->cmp, s->move, s->calls, time->tv_sec, time->tv_nsec);
+    fclose(fp);
+}
 
 int main (int argc, char ** argv){
   sortperf_t s;
@@ -628,6 +637,8 @@ int main (int argc, char ** argv){
 
   retp = clock_gettime(CLOCK_MONOTONIC, &inittp);
   
+  char *csv_filename = "sort_results.csv";
+
   // execute algorithm
   switch (opt.alg){
     case ALGINSERTION:
@@ -673,6 +684,7 @@ int main (int argc, char ** argv){
   retp = clock_gettime(CLOCK_MONOTONIC, &endtp);
   clkDiff(inittp, endtp, &restp);
 
+  print_csv(csv_filename, &s, opt.size, &restp);
 
   if (opt.size<100) printVector(vet, opt.size);
 
