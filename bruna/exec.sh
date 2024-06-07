@@ -21,7 +21,7 @@ do
         t=0  # Define o valor de t como 0
         output=$(./bin/pa1.out -z $i -s 32 -a $alg -t $t)
         # Processa a saída para remover as colunas duplicadas e redireciona para o arquivo .csv
-        echo "$iteracao,$output" | awk -F ',' '{print $2 "," $4 "," $6 "," $8 "," $10 "," $12 "," $14}' >> $arquivo_saida
+        echo "$iteracao,$output" | tr ' ' ',' >> $arquivo_saida
         iteracao=$((iteracao+1))
     done
 done
